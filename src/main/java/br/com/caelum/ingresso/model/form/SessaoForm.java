@@ -12,7 +12,7 @@ import java.util.*;
 import javax.validation.constraints.NotNull;
 
 
-public class sessaForm {
+public class SessaoForm {
 	private Integer id;
 	
 	@DateTimeFormat(pattern="HH:mm")
@@ -20,7 +20,7 @@ public class sessaForm {
 	private LocalTime horario;
 	
 	@NotNull
-	private Integer filmeid;
+	private Integer filmeId;
 	
 	@NotNull
 	private Integer salaId;
@@ -49,18 +49,18 @@ public class sessaForm {
 		this.horario = horario;
 	}
 
-	public Integer getFilmeid() {
-		return filmeid;
+	public Integer getfilmeId() {
+		return filmeId;
 	}
 
-	public void setFilmeid(Integer filmeid) {
-		this.filmeid = filmeid;
+	public void setfilmeId(Integer filmeid) {
+		this.filmeId = filmeid;
 	}
 
 	
 	public Sessao toSessao(SalaDao saladao,FilmeDao filmedao)
 	{
-		Filme filme = filmedao.findOne(filmeid);
+		Filme filme = filmedao.findOne(filmeId);
 		Sala sala = saladao.findOne(salaId);
 		
 		Sessao sessao = new Sessao(horario,filme,sala);
