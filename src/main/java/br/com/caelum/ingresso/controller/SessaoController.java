@@ -1,5 +1,6 @@
 package br.com.caelum.ingresso.controller;
 
+import br.com.caelum.ingresso.GerenciadorDeSessao;
 import br.com.caelum.ingresso.dao.*;
 import java.time.*;
 import br.com.caelum.ingresso.model.*;
@@ -50,8 +51,13 @@ public class SessaoController {
 		ModelAndView modelandview = new ModelAndView("redirect:/admin/sala/"+form.getSalaId()+"/sessoes");
 		Sessao sessao = form.toSessao(saladao, filmedao);
 
+		List<Sessao> sessoes = sessaodao.BuscaSessao(sessao.getSala());
+		GerenciadorDeSessao gds = new GerenciadorDeSessao(sessoes);
+		if(gds.Verifica(sessao))
+		{
+			sessaodao.Salva(sessao);
+		}
 		
-		sessaodao.Salva(sessao);
 		return modelandview;
 	}
 	
