@@ -3,6 +3,9 @@ package br.com.caelum.ingresso;
 import br.com.caelum.ingresso.model.*;
 import java.util.*;
 import java.util.stream.Stream;
+
+import org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl;
+
 import java.time.*;
 
 public class GerenciadorDeSessao {
@@ -16,14 +19,10 @@ public class GerenciadorDeSessao {
 	
 	public boolean Verifica(Sessao nova)
 	{
-		for(Sessao existente:this.sessoes)
-		{
-			if(!this.horarioIsValido(existente, nova))
-			{
-				return false;
-			}
-		}
-		return true;
+		Stream<Sessao> sSessoes = this.sessoes.stream();
+		return sSessoes.allMatch(sExist -> horarioIsValido(sExist, nova));
+		
+		
 	}
 	
 	private boolean horarioIsValido(Sessao sessaoExistente, Sessao sessaoAtual)
