@@ -64,8 +64,6 @@ public class SessaoController {
 			sessaodao.Salva(sessao);
 		}
 
-	
-		sessaodao.Salva(sessao);
 		return modelandview;
 	}
 	
