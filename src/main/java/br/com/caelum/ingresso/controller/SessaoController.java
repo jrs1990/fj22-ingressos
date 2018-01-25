@@ -1,9 +1,13 @@
 package br.com.caelum.ingresso.controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import br.com.caelum.ingresso.GerenciadorDeSessao;
 =======
 >>>>>>> recuperacodigo
+=======
+import br.com.caelum.ingresso.GerenciadorDeSessao;
+>>>>>>> origin/cursoCaelumAlteracoes
 import br.com.caelum.ingresso.dao.*;
 import java.time.*;
 import br.com.caelum.ingresso.model.*;
@@ -55,16 +59,25 @@ public class SessaoController {
 		Sessao sessao = form.toSessao(saladao, filmedao);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		GerenciadorDeSessao gds = new GerenciadorDeSessao(sessaodao.BuscaSessao(sessao.getSala()));
+=======
+		List<Sessao> sessoes = sessaodao.BuscaSessao(sessao.getSala());
+		GerenciadorDeSessao gds = new GerenciadorDeSessao(sessoes);
+>>>>>>> origin/cursoCaelumAlteracoes
 		if(gds.Verifica(sessao))
 		{
 			sessaodao.Salva(sessao);
 		}
+<<<<<<< HEAD
 		
 =======
 		
 		sessaodao.Salva(sessao);
 >>>>>>> recuperacodigo
+=======
+		
+>>>>>>> origin/cursoCaelumAlteracoes
 		return modelandview;
 	}
 	
