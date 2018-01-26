@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.management.loading.PrivateClassLoader;
 import javax.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,10 +26,16 @@ public class Sessao {
 	@ManyToOne
 	private Filme filme;
 	
+	private BigDecimal preco;
+	
+	
+
+
 	public Sessao()
 	{
 		
 	}
+
 	
 	public Sessao(LocalTime horario, Filme filme, Sala sala)
 	{
@@ -36,7 +43,14 @@ public class Sessao {
 		this.filme = filme;
 		this.sala=sala;
 		
+		this.preco = filme.getPreco().add(sala.getPreco());
+		
 	}
+	
+	public BigDecimal getPreco() {
+		return preco;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
