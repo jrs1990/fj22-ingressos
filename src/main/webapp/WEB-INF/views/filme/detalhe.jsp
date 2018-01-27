@@ -19,32 +19,32 @@
 	        <image src="${detalhes.imagem}" />
 	
 	        <div>
-	            <label for="ano">Ano</label>
+	            <label for="ano">Ano: </label>
 	            <span id="ano">${detalhes.ano}</span>
 	        </div>
 	
 	        <div>
-	            <label for="diretores">Diretores</label>
+	            <label for="diretores">Diretores: </label>
 	            <span id="diretores">${detalhes.diretores}</span>
 	        </div>
 	
 	        <div>
-	            <label for="escritores">Escritores</label>
+	            <label for="escritores">Escritores: </label>
 	            <span id="escritores">${detalhes.escritores}</span>
 	        </div>
 	
 	        <div>
-	            <label for="atores">Atores</label>
+	            <label for="atores">Atores: </label>
 	            <span id="atores">${detalhes.atores}</span>
 	        </div>
 	
 	        <div>
-	            <label for="descricao">Descrição</label>
+	            <label for="descricao">Descrição: </label>
 	            <span id="descricao">${detalhes.descricao}</span>
 	        </div>
 	
 	        <div>
-	            <label for="avaliacao">Avaliação</label>
+	            <label for="avaliacao">Avaliação: </label>
 	            <span id="avaliacao">${detalhes.avaliacao}</span>
 	        </div>
 

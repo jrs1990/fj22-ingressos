@@ -1,12 +1,17 @@
 package br.com.caelum.ingresso.controller;
 
+import br.com.caelum.ingresso.clientJson;
 import br.com.caelum.ingresso.dao.FilmeDao;
+import br.com.caelum.ingresso.dao.SessaoDao;
 import br.com.caelum.ingresso.model.Filme;
+import br.com.caelum.ingresso.model.FilmeDados;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -21,6 +26,9 @@ public class FilmeController {
 
     @Autowired
     private FilmeDao filmeDao;
+    
+    @Autowired
+    private SessaoDao sessaodao;
 
 
     @GetMapping({"/admin/filme", "/admin/filme/{id}"})
@@ -71,5 +79,34 @@ public class FilmeController {
     public void delete(@PathVariable("id") Integer id){
         filmeDao.delete(id);
     }
+    
+    @GetMapping("/filme/em-cartaz")
+    public ModelAndView filmesEmCartaz()
+    {
+    	ModelAndView view = new ModelAndView("filme/em-cartaz");
+    	view.addObject("filmes",filmeDao.findAll()) ;
+    	return view;
+
+    }
+    
+    @GetMapping("/filme/{id}/detalhe")
+    public ModelAndView filmesDetalhe(@PathVariable("id") Integer idFilme)
+    {
+    	ModelAndView view = new ModelAndView("filme/detalhe");
+    	
+    	Filme filme = filmeDao.findOne(idFilme);
+    	String parametros = "title="+filme.getNome();
+    	clientJson<FilmeDados> obj = new clientJson<FilmeDados>();
+    	
+    	Optional<FilmeDados> filmedados = obj.ConsultaServico(parametros,FilmeDados.class);
+    	
+		view.addObject("detalhes",filmedados.orElse(new FilmeDados()));
+    	view.addObject("sessoes",sessaodao.BuscaSessoesDoFilme(filme));
+    	
+    	
+    	return view;
+    	
+    }
+    
 
 }

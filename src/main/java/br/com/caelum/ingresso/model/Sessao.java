@@ -28,7 +28,8 @@ public class Sessao {
 	
 	private BigDecimal preco;
 	
-	
+	@OneToMany(mappedBy="sessao",fetch=FetchType.EAGER)
+	private Set<Ingresso> ingressos = new HashSet<>();
 
 
 	public Sessao()
@@ -82,6 +83,17 @@ public class Sessao {
 	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
+	
+	public Map<String,List<Lugar>> getMapaDeLugares()
+	{
+		return sala.getMapaDeLugares();
+	}
+	
+	public boolean isDisponivel(Lugar lugarSelecionado)
+	{
+		return this.ingressos.stream().map(Ingresso::getLugar).noneMatch(lugar -> lugar.equals(lugarSelecionado));
+	}
+	
 
 
 }

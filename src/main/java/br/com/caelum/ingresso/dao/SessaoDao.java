@@ -26,4 +26,17 @@ public class SessaoDao {
 				 .getResultList();
 
 	}
+	
+	public List<Sessao> BuscaSessoesDoFilme(Filme filme)
+	{
+		 return   mananger.createQuery("select s from Sessao s where s.filme = :filme",Sessao.class)
+				 .setParameter("filme",filme)
+				 .getResultList();
+
+	}
+	
+	public Sessao FindOne(int sessaoID)
+	{
+		return   mananger.find(Sessao.class, sessaoID);
+	}
 }
