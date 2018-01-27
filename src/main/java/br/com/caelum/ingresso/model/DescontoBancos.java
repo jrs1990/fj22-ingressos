@@ -15,4 +15,9 @@ public class DescontoBancos implements IDesconto {
 		return precoOriginal.multiply(new BigDecimal("0.3"));
 	}
 
+	@Override
+	public String getDescricao() {
+		return "Desconto Santander";
+	}
+
 }

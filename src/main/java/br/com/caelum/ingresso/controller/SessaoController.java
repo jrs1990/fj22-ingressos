@@ -2,7 +2,8 @@ package br.com.caelum.ingresso.controller;
 
 
 import br.com.caelum.ingresso.GerenciadorDeSessao;
-
+import br.com.caelum.ingresso.ImagemCapa;
+import br.com.caelum.ingresso.clientJson;
 import br.com.caelum.ingresso.GerenciadorDeSessao;
 
 import br.com.caelum.ingresso.dao.*;
@@ -32,6 +33,7 @@ public class SessaoController {
 	
 	@Autowired
 	private SessaoDao sessaodao;
+
 	
 	@GetMapping("admin/sessao")
 	public ModelAndView form(@RequestParam("salaId") Integer salaId,SessaoForm form)
@@ -67,6 +69,23 @@ public class SessaoController {
 		return modelandview;
 	}
 	
+	@GetMapping("/sessao/{id}/lugares")
+	public ModelAndView lugaresNaSessao(@PathVariable("id") int idSessao)
+	{
+		clientJson<ImagemCapa> client = new clientJson<ImagemCapa>();
+		ModelAndView view = new ModelAndView("sessao/lugares");
+		Sessao sessao = sessaodao.FindOne(idSessao);
+		String parametros = "title="+sessao.getFilme().getNome();
+		
+		Optional<ImagemCapa> imagemcapa = client.ConsultaServico(parametros, ImagemCapa.class);
+		
+
+		view.addObject("sessao",sessao);
+		view.addObject("detalhes",imagemcapa.orElse(new ImagemCapa()));
+		view.addObject("tiposDeIngressos",TipoIngresso.values());
+		return view;
+		
+	}
 
 	
 

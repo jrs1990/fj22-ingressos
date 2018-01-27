@@ -10,4 +10,9 @@ public class SemDesconto implements IDesconto {
 		return precoOriginal;
 	}
 
+	@Override
+	public String getDescricao() {
+		return "Normal";
+	}
+
 }
